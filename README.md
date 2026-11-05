@@ -60,6 +60,26 @@ flowchart LR
     E --> F[Web-Based Contract Signature]
 ```
 
+### 4. API Bolaños: Serverless API for Pop Culture Historical Data (Chaves & Chapolin)
+* **Context:** An open-source, high-performance REST API developed as a community asset to serve structured data, episodes, and search capabilities for the iconic works of Roberto Gómez Bolaños.
+* **Architecture:** Engineered on **Node.js (ES Modules)** and deployed on **Vercel Serverless Functions** to leverage Edge Delivery & CDN Cache, ensuring instant response times globally without database roundtrip overhead.
+* **Tech Features:** 
+  * Native CORS and CDN caching for sub-millisecond public access.
+  * Pattern-matching search engine (`/search?q=`) to scan and filter episodic titles and summaries.
+  * Serverless architecture designed for zero-cold-start delivery.
+* **Links:** [Production API](https://api-bolanos.vercel.app/) | [GitHub Repository](https://github.com/jonatascrizel/api-bolanos)
+
+```mermaid
+flowchart LR
+    A[Client App / User] --> B[Vercel Edge Gateway]
+    B --> C{CDN Cache Hit?}
+    C -->|Yes| D[Sub-millisecond Return]
+    C -->|No| E[Serverless Event /api]
+    E --> F[In-Memory DataSet / Search]
+    F --> G[New CDN Edge Cache]
+    G --> H[JSON Response]
+``` 
+
 ---
 
 ## 📂 Other Systems in Production
